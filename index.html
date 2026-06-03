@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>សៀវភៅអនុស្សាវរីយ៍យុវវ័យទំនើប Multi-Theme Pro 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kantumruuy+Pro:ital,wght@0,100..700;1,100..700&family=Khmer+OS+Battambang&display=swap');
+
+        /* ==========================================================================
+           🎨 CORE SYSTEM THEMES & CSS VARIABLES (EXPANDED ARCHITECTURE)
+           ========================================================================== */
+        :root {
+            --cartoon-bg: #E3F2FD;
+            --book-cover: linear-gradient(135deg, #FF8008 0%, #FFC837 100%);
+            --book-border: #2C3E50;
+            --page-bg: #FFFFFF;
+            --notebook-line: #E2E8F0;
+            --text-dark: #2C3E50;
+            --cute-pink: #FF6B81;
+            --cute-blue: #54a0ff;
+            --cute-yellow: #FEF08A;
+            --cute-purple: #9b5de5;
+            --cute-green: #22C55E;
+            --accent-glow: rgba(255, 128, 8, 0.3);
+        }
+
+        /* 🌸 Theme 1: Strawberry Pink */
+        body.theme-pink {
+            --cartoon-bg: #FFE4E6;
+            --book-cover: linear-gradient(135deg, #FF6B81 0%, #FFA8B6 100%);
+            --book-border: #4A1525;
+            --cute-pink: #FF4757;
+            --cute-blue: #74B9FF;
+            --accent-glow: rgba(255, 71, 87, 0.3);
+        }
+
+        /* 🌊 Theme 2: Ocean Blue */
+        body.theme-blue {
+            --cartoon-bg: #E0F2FE;
+            --book-cover: linear-gradient(135deg, #0984E3 0%, #74B9FF 100%);
+            --book-border: #0F2D4A;
+            --cute-pink: #FF6B81;
+            --cute-blue: #00CEC9;
+            --accent-glow: rgba(9, 132, 227, 0.3);
+        }
+
+        /* 🫡 Theme 3: Army Green */
+        body.theme-green {
+            --cartoon-bg: #F0FDF4;
+            --book-cover: linear-gradient(135deg, #1B4D3E 0%, #A3E635 100%);
+            --book-border: #0A1F1A;
+            --cute-pink: #F43F5E;
+            --cute-blue: #38BDF8;
+            --accent-glow: rgba(27, 77, 62, 0.3);
+        }
+
+        /* 🌌 Theme 4: Galaxy Purple */
+        body.theme-purple {
+            --cartoon-bg: #F3E8FF;
+            --book-cover: linear-gradient(135deg, #6C5CE7 0%, #A8DAFF 100%);
+            --book-border: #2D2554;
+            --cute-pink: #FF7675;
+            --cute-blue: #0984E3;
+            --accent-glow: rgba(108, 92, 231, 0.3);
+        }
+
+        /* 🌅 Theme 5: Sunset Orange */
+        body.theme-sunset {
+            --cartoon-bg: #FEF3C7;
+            --book-cover: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
+            --book-border: #451A03;
+            --cute-pink: #EF4444;
+            --cute-blue: #3B82F6;
+            --accent-glow: rgba(217, 119, 6, 0.3);
+        }
+
+        /* ==========================================================================
+           RESET & GLOBAL LAYOUT SETUP
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--cartoon-bg);
+            background-image: radial-gradient(rgba(0, 0, 0, 0.04) 15%, transparent 16%),
+                              radial-gradient(rgba(0, 0, 0, 0.04) 15%, transparent 16%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            font-family: 'Kantumruuy Pro', 'Khmer OS Battambang', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.02); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--book-border); border-radius: 10px; }
+
+        /* ==========================================================================
+           ✈️ PAPER AIRPLANE FLYING ANIMATION SYSTEM (BACKGROUND CORRIDOR)
+           ========================================================================== */
+        .airplane-corridor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .paper-plane-vector {
+            position: absolute;
+            opacity: 0;
+            fill: var(--page-bg);
+            transition: fill 0.5s ease;
+        }
+
+        /* ✈️ គ្រឿងទី១: ហោះពីឆ្វេងទៅស្តាំ កាត់កណ្តាលអេក្រង់ */
+        .plane-node-1 {
+            width: 55px;
+            height: 55px;
+            left: -10%;
+            top: 65%;
+            animation: flyPathAlpha 16s infinite linear;
+            filter: drop-shadow(5px 8px 0px rgba(0,0,0,0.06));
+        }
+
+        /* ✈️ គ្រឿងទី២: ហោះខ្ពស់ បែបលឿនស្លេវ */
+        .plane-node-2 {
+            width: 40px;
+            height: 40px;
+            left: -10%;
+            top: 20%;
+            animation: flyPathBeta 13s infinite linear;
+            animation-delay: 4s;
+            filter: drop-shadow(4px 6px 0px rgba(0,0,0,0.05));
+        }
+
+        /* ✈️ គ្រឿងទី៣: ហោះពីស្តាំមកឆ្វេង (បញ្ច្រាសទិសដៅ) */
+        .plane-node-3 {
+            width: 48px;
+            height: 48px;
+            right: -10%;
+            top: 75%;
+            animation: flyPathGamma 20s infinite linear;
+            animation-delay: 2s;
+            filter: drop-shadow(-5px 8px 0px rgba(0,0,0,0.06));
+        }
+
+        @keyframes flyPathAlpha {
+            0% { transform: translate(0, 0) rotate(15deg) scale(0.8); opacity: 0; }
+            5% { opacity: 0.85; }
+            35% { transform: translate(35vw, -25vh) rotate(5deg) scale(1); }
+            70% { transform: translate(75vw, -15vh) rotate(25deg) scale(0.9); }
+            90% { opacity: 0.85; }
+            100% { transform: translate(115vw, -45vh) rotate(10deg) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes flyPathBeta {
+            0% { transform: translate(0, 0) rotate(35deg) scale(0.7); opacity: 0; }
+            8% { opacity: 0.75; }
+            50% { transform: translate(50vw, -12vh) rotate(15deg) scale(0.9); }
+            85% { transform: translate(95vw, -35vh) rotate(45deg) scale(0.8); }
+            95% { opacity: 0.75; }
+            100% { transform: translate(115vw, -45vh) rotate(30deg) scale(0.7); opacity: 0; }
+        }
+
+        @keyframes flyPathGamma {
+            0% { transform: translate(0, 0) rotate(-145deg) scale(0.8); opacity: 0; }
+            5% { opacity: 0.7; }
+            45% { transform: translate(-45vw, -25vh) rotate(-160deg) scale(1); }
+            80% { transform: translate(-85vw, -10vh) rotate(-135deg) scale(0.9); }
+            95% { opacity: 0.7; }
+            100% { transform: translate(-115vw, -35vh) rotate(-150deg) scale(0.8); opacity: 0; }
+        }
+
+        /* --- Clouds Backgrounds --- */
+        .cartoon-element {
+            position: absolute;
+            background: white;
+            border: 4px solid var(--book-border);
+            border-radius: 50px;
+            opacity: 0.6;
+            animation: floatCloud 14s infinite ease-in-out;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .cloud-1 { width: 130px; height: 50px; top: 6%; left: 4%; }
+        .cloud-1::before { content: ''; position: absolute; width: 55px; height: 55px; background: white; border: 4px solid var(--book-border); border-radius: 50%; top: -28px; left: 20px; border-bottom: none; }
+        
+        .cloud-2 { width: 160px; height: 55px; bottom: 8%; right: 4%; animation-delay: 3.5s; }
+        .cloud-2::before { content: ''; position: absolute; width: 65px; height: 65px; background: white; border: 4px solid var(--book-border); border-radius: 50%; top: -32px; left: 32px; border-bottom: none; }
+
+        @keyframes floatCloud {
+            0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+            50% { transform: translateX(40px) translateY(-15px) scale(1.05); }
+        }
+
+        /* ==========================================================================
+           🎨 THEME SWITCHER HUB INTERFACE
+           ========================================================================== */
+        .theme-switcher-hub {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            border: 4px solid var(--book-border);
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: 4px 4px 0px var(--book-border);
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .theme-node {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 3px solid var(--book-border);
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .theme-node:hover { transform: scale(1.2); }
+        .node-sunset { background: linear-gradient(#D97706, #FBBF24); }
+        .node-pink { background: linear-gradient(#FF6B81, #FFA8B6); }
+        .node-blue { background: linear-gradient(#0984E3, #74B9FF); }
+        .node-green { background: linear-gradient(#1B4D3E, #A3E635); }
+        .node-purple { background: linear-gradient(#6C5CE7, #A8DAFF); }
+
+        /* ==========================================================================
+           MAIN CONTAINER & 3D STRUCTURE
+           ========================================================================== */
+        .app-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1150px;
+        }
+
+        .book-view-box {
+            position: relative;
+            width: 100%;
+            height: 680px;
+            perspective: 3000px;
+        }
+
+        .book-body-shell {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--book-cover);
+            border: 6px solid var(--book-border);
+            border-radius: 36px;
+            box-shadow: 0 16px 0px var(--book-border), 0 35px 30px rgba(0,0,0,0.2);
+            padding: 14px;
+            transform-style: preserve-3d;
+            transition: background 0.5s ease;
+        }
+
+        /* Cover Sheets Layers */
+        .cover-sheet {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
+            background: var(--book-cover);
+            border: 6px solid var(--book-border);
+            border-radius: 36px;
+            z-index: 500;
+            display: flex;
+            box-shadow: 15px 0px 0px rgba(0,0,0,0.08);
+            transform-origin: left center;
+            transition: transform 1.6s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease, background 0.5s ease;
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        .book-view-box.is-open .cover-sheet {
+            transform: rotateY(-145deg);
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .cover-sheet-left {
+            flex: 1.1;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cover-sheet-right {
+            flex: 0.9;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.18);
+            border-left: 6px dashed var(--book-border);
+            border-radius: 0 30px 30px 0;
+            overflow-y: auto;
+        }
+
+        .cartoon-badge {
+            background: var(--book-border);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 14px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .cartoon-big-title {
+            font-size: 2.4rem;
+            color: white;
+            text-align: center;
+            text-shadow: 4px 4px 0px var(--book-border);
+            margin: 10px 0;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        /* ==========================================================================
+           📸 PHOTO WIZARD BUILDER SETUP
+           ========================================================================== */
+        .wizard-container {
+            width: 100%;
+            background: #FFFFFF;
+            border: 4px solid var(--book-border);
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 6px 6px 0px var(--book-border);
+        }
+
+        .wz-title {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin: 0 0 12px 0;
+            text-align: center;
+        }
+
+        .wz-progress-rail {
+            width: 100%;
+            height: 12px;
+            background: #EDF2F7;
+            border: 3px solid var(--book-border);
+            border-radius: 12px;
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+
+        .wz-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--cute-pink);
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .wz-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #F7FAFC;
+            padding: 8px 14px;
+            border: 3px solid var(--book-border);
+            border-radius: 14px;
+            margin-bottom: 6px;
+        }
+
+        .wz-item-row.done-row {
+            background: #F0FDF4;
+            border-color: var(--cute-green);
+        }
+
+        .wz-item-label { font-size: 0.82rem; font-weight: bold; color: var(--text-dark); }
+
+        /* ==========================================================================
+           INSIDE PAGES LAYOUT ARCHITECTURE
+           ========================================================================== */
+        .book-pages-spread {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: var(--page-bg);
+            border: 4px solid var(--book-border);
+            border-radius: 26px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .book-spine-rings {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 36px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.06) 100%);
+            transform: translateX(-50%);
+            z-index: 100;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 35px 0;
+        }
+
+        .spine-ring-clip {
+            width: 42px;
+            height: 14px;
+            background: #E2E8F0;
+            border: 3px solid var(--book-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.12);
+        }
+
+        .inner-page-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.97) translateX(15px);
+            transition: opacity 0.4s ease-in-out, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .inner-page-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1) translateX(0);
+        }
+
+        .inner-page-left {
+            flex: 1;
+            padding: 55px 45px 45px 65px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-image: linear-gradient(var(--notebook-line) 2px, transparent 2px);
+            background-size: 100% 34px;
+            background-origin: content-box;
+            overflow-y: auto;
+        }
+
+        .inner-page-right {
+            flex: 1;
+            padding: 45px 65px 45px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .cartoon-heading-bubble {
+            font-size: 1.75rem;
+            color: var(--text-dark);
+            margin: 0 0 15px 0;
+            font-weight: 800;
+            background: var(--cute-yellow);
+            padding: 8px 22px;
+            border: 4px solid var(--book-border);
+            border-radius: 18px;
+            box-shadow: 5px 5px 0px var(--book-border);
+            align-self: flex-start;
+            transform: rotate(-1.5deg);
+        }
+
+        .cartoon-diary-bubble {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.75;
+            background: #FFFFFF;
+            border: 4px solid var(--book-border);
+            padding: 18px;
+            border-radius: 22px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Polaroid Boxes */
+        .cartoon-polaroid {
+            width: 235px;
+            height: 295px;
+            background: #FFFFFF;
+            border: 4px solid var(--book-border);
+            border-radius: 4px;
+            padding: 12px 12px 42px 12px;
+            box-shadow: 7px 9px 0px rgba(0,0,0,0.06);
+            transform: rotate(2.5deg);
+            position: relative;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        .cartoon-polaroid:hover { transform: rotate(0deg) scale(1.03); }
+
+        .polaroid-tape-sticker {
+            position: absolute;
+            top: -18px;
+            left: 32%;
+            width: 95px;
+            height: 26px;
+            background: rgba(147, 197, 253, 0.9);
+            border: 2px dashed rgba(0,0,0,0.15);
+            transform: rotate(-5deg);
+            z-index: 10;
+        }
+
+        .polaroid-image-frame { width: 100%; height: 100%; background: #EDF2F7; border: 3px solid var(--book-border); overflow: hidden; border-radius: 2px; }
+        .polaroid-image-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ==========================================================================
+           ✍️ INTERACTIVE COMMENT WORKSTATION (PAGE 5 RIGGED)
+           ========================================================================== */
+        .comment-input-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #FFFDF2;
+            border: 4px solid var(--book-border);
+            padding: 16px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 0px var(--book-border);
+            margin-bottom: 8px;
+        }
+
+        .comment-input-form input, .comment-input-form textarea {
+            width: 100%;
+            font-family: inherit;
+            font-size: 0.95rem;
+            padding: 12px;
+            border: 3px solid var(--book-border);
+            border-radius: 12px;
+            outline: none;
+            background: white;
+        }
+        .comment-input-form input:focus, .comment-input-form textarea:focus { box-shadow: 0 0 0 4px var(--accent-glow); }
+
+        .sticker-tray-row { display: flex; align-items: center; gap: 8px; background: white; padding: 6px 10px; border: 3px solid var(--book-border); border-radius: 10px; }
+        .sticker-tray-label { font-size: 0.78rem; font-weight: 1000; color: var(--text-dark); }
+        
+        .sticker-node-btn { font-size: 1.2rem; cursor: pointer; padding: 2px 6px; border-radius: 6px; border: 2px solid transparent; transition: all 0.15s ease; }
+        .sticker-node-btn.is-selected { background: var(--cute-yellow); border-color: var(--book-border); transform: scale(1.15); }
+
+        .comment-stream-box { width: 100%; max-height: 290px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 6px; margin-top: 4px; }
+        
+        .single-comment-card {
+            background: white;
+            border: 3px solid var(--book-border);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 4px 4px 0px var(--book-border);
+            animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8) translateY(10px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .comment-user-header { font-weight: 900; color: var(--cute-pink); font-size: 1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .comment-text { font-size: 0.92rem; color: var(--text-dark); line-height: 1.5; }
+        
+        .comment-blessing {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 3px dashed var(--notebook-line);
+            font-size: 0.86rem;
+            color: #16A34A;
+            font-weight: bold;
+            line-height: 1.45;
+        }
+
+        /* --- Mechanical Buttons Matrix --- */
+        .cartoon-btn {
+            padding: 10px 22px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            border: 4px solid var(--book-border);
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--book-border);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            font-family: inherit;
+        }
+
+        .cartoon-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--book-border); }
+
+        .btn-action-trigger { background: var(--cute-pink); color: white; font-size: 1.25rem; padding: 14px 36px; margin-top: 12px; border-radius: 20px; }
+        .btn-wz-upload { background: var(--cute-blue); color: white; padding: 4px 14px; font-size: 0.78rem; border-radius: 10px; }
+        .btn-wz-upload.is-done { background: var(--cute-green); }
+        .btn-page-nav { background: white; color: var(--text-dark); }
+        .btn-submit-cmt { background: var(--cute-green); color: white; border-radius: 12px; font-size: 1rem; padding: 10px; }
+
+        /* --- Footer System --- */
+        .page-control-footer {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .book-view-box.is-open ~ .page-control-footer { visibility: visible; opacity: 1; }
+        .page-badge-counter { background: white; border: 4px solid var(--book-border); padding: 8px 24px; border-radius: 18px; color: var(--text-dark); font-weight: 900; font-size: 1.05rem; box-shadow: 4px 4px 0px var(--book-border); }
+        
+        .hidden-file-input { display: none; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 1; }
+            100% { transform: translateY(-160px) scale(1.5) rotate(25deg); opacity: 0; }
+        }
+        .floating-pop-node { position: absolute; pointer-events: none; animation: floatUp 2.5s ease-out forwards; z-index: 90; }
+
+        /* ==========================================================================
+           ⚡ CROSS-PLATFORM MOBILE ADAPTIVITY MATRIX (iOS / Android Adaptive Layout)
+           ========================================================================== */
+        @media (max-width: 900px) {
+            body { padding: 12px; }
+            .theme-switcher-hub { top: 10px; right: 10px; padding: 6px 10px; }
+            .book-view-box { height: auto; min-height: calc(100vh - 120px); }
+            .book-body-shell { position: relative; height: auto; display: flex; flex-direction: column; border-radius: 26px; }
+            
+            .cover-sheet { position: relative; top: 0; left: 0; width: 100%; height: auto; flex-direction: column; border-radius: 22px; transform: none !important; opacity: 1 !important; }
+            .book-view-box.is-open .cover-sheet { display: none; } 
+            .cover-sheet-left { padding: 25px 12px; }
+            .cover-sheet-right { width: 100%; border-left: none; border-top: 5px dashed var(--book-border); border-radius: 0 0 22px 22px; padding: 18px; }
+            
+            .book-pages-spread { flex-direction: column; height: auto; min-height: 560px; border-radius: 20px; }
+            .book-spine-rings { display: none; } 
+            
+            .inner-page-slide { position: relative; display: none; flex-direction: column; height: auto; transform: none !important; }
+            .inner-page-slide.active { display: flex; }
+            
+            .inner-page-left { padding: 35px 22px 15px 22px; background-size: 100% 28px; }
+            .inner-page-right { padding: 15px 22px 35px 22px; }
+            
+            .cartoon-big-title { font-size: 1.9rem; }
+            .cartoon-heading-bubble { font-size: 1.45rem; }
+            .comment-stream-box { max-height: 250px; }
+        }
+    </style>
+</head>
+<body class="theme-sunset">
+
+    <div class="theme-switcher-hub">
+        <div class="theme-node node-sunset" title="Sunset" onclick="modifyGlobalAppTheme('theme-sunset')"></div>
+        <div class="theme-node node-pink" title="Pink" onclick="modifyGlobalAppTheme('theme-pink')"></div>
+        <div class="theme-node node-blue" title="Blue" onclick="modifyGlobalAppTheme('theme-blue')"></div>
+        <div class="theme-node node-green" title="Green" onclick="modifyGlobalAppTheme('theme-green')"></div>
+        <div class="theme-node node-purple" title="Purple" onclick="modifyGlobalAppTheme('theme-purple')"></div>
+    </div>
+
+    <div class="airplane-corridor">
+        <svg viewBox="0 0 100 100" class="paper-plane-vector plane-node-1">
+            <path d="M10,50 L90,20 L60,80 L50,55 Z" stroke="var(--book-border)" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M90,20 L50,55 L10,50" fill="none" stroke="var(--book-border)" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <svg viewBox="0 0 100 100" class="paper-plane-vector plane-node-2">
+            <path d="M10,50 L90,20 L60,80 L50,55 Z" stroke="var(--book-border)" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M90,20 L50,55 L10,50" fill="none" stroke="var(--book-border)" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <svg viewBox="0 0 100 100" class="paper-plane-vector plane-node-3">
+            <path d="M90,50 L10,20 L40,80 L50,55 Z" stroke="var(--book-border)" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M10,20 L50,55 L90,50" fill="none" stroke="var(--book-border)" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
+    <div class="cartoon-element cloud-1"></div>
+    <div class="cartoon-element cloud-2"></div>
+
+    <div class="app-wrapper">
+        <div class="book-view-box" id="bookViewBox">
+            <div class="book-body-shell">
+                
+                <div class="cover-sheet">
+                    <div class="cover-sheet-left">
+                        <div class="cartoon-badge">MEMORIES DIARY 2026</div>
+                        <h1 class="cartoon-big-title">សៀវភៅកំណត់ហេតុ<br>អនុស្សាវរីយ៍យុវវ័យ</h1>
+                        <div class="cartoon-polaroid" style="width: 175px; height: 215px; transform: rotate(-2deg); margin-bottom: 5px;">
+                            <div class="polaroid-image-frame">
+                                <img id="imgPreCover" src="https://picsum.photos/400/500?random=50" alt="Cover">
+                            </div>
+                        </div>
+                        <button class="cartoon-btn btn-action-trigger" onclick="openCartoonBook()">📖 បើកអានសៀវភៅ</button>
+                    </div>
+
+                    <div class="cover-sheet-right">
+                        <div class="wizard-container">
+                            <h3 class="wz-title">📸 សូមបញ្ចូលរូបថតឱ្យគ្រប់ ១ ទៅ ១ មុនគេ៖</h3>
+                            <div class="wz-progress-rail"><div class="wz-progress-bar" id="wzProgressBar"></div></div>
+
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <div class="wz-item-row" id="wzRow0">
+                                    <div class="wz-item-label">⭐ ១. រូបថតក្របមុខធំ</div>
+                                    <button class="cartoon-btn btn-wz-upload" id="wzBtn0" onclick="triggerFileUploader('fileCover')">➕ ជ្រើសរើស</button>
+                                    <input type="file" id="fileCover" class="hidden-file-input" accept="image/*" onchange="processImagePreview(this, 'imgPreCover', 0)">
+                                </div>
+                                <div class="wz-item-row" id="wzRow1">
+                                    <div class="wz-item-label">🫡 ២. ទំព័រជំនួយទាហាន</div>
+                                    <button class="cartoon-btn btn-wz-upload" id="wzBtn1" onclick="triggerFileUploader('fileP1')">➕ ជ្រើសរើស</button>
+                                    <input type="file" id="fileP1" class="hidden-file-input" accept="image/*" onchange="processImagePreview(this, 'imgPreP1', 1)">
+                                </div>
+                                <div class="wz-item-row" id="wzRow2">
+                                    <div class="wz-item-label">🤝 ៣. ទំព័រជួយជនភៀសសឹក</div>
+                                    <button class="cartoon-btn btn-wz-upload" id="wzBtn2" onclick="triggerFileUploader('fileP2')">➕ ជ្រើសរើស</button>
+                                    <input type="file" id="fileP2" class="hidden-file-input" accept="image/*" onchange="processImagePreview(this, 'imgPreP2', 2)">
+                                </div>
+                                <div class="wz-item-row" id="wzRow3">
+                                    <div class="wz-item-label">🌊 ៤. ទំព័រគេចរៀនលេងទឹក</div>
+                                    <button class="cartoon-btn btn-wz-upload" id="wzBtn3" onclick="triggerFileUploader('fileP3')">➕ ជ្រើសរើស</button>
+                                    <input type="file" id="fileP3" class="hidden-file-input" accept="image/*" onchange="processImagePreview(this, 'imgPreP3', 3)">
+                                </div>
+                                <div class="wz-item-row" id="wzRow4">
+                                    <div class="wz-item-label">🎓 ៥. ទំព័រលាហើយមិត្តភក្តិ</div>
+                                    <button class="cartoon-btn btn-wz-upload" id="wzBtn4" onclick="triggerFileUploader('fileP4')">➕ ជ្រើសរើស</button>
+                                    <input type="file" id="fileP4" class="hidden-file-input" accept="image/*" onchange="processImagePreview(this, 'imgPreP4', 4)">
+                                </div>
+                                <div class="wz-item-row" id="wzRow5">
+                                    <div class="wz-item-label">📸 ៦. រូបថតរួមទំព័រហត្ថលេខា</div>
+                                    <button class="cartoon-btn btn-wz-upload" id="wzBtn5" onclick="triggerFileUploader('fileP5')">➕ ជ្រើសរើស</button>
+                                    <input type="file" id="fileP5" class="hidden-file-input" accept="image/*" onchange="processImagePreview(this, 'imgPreP5', 5)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-pages-spread">
+                    <div class="book-spine-rings">
+                        <div class="spine-ring-clip"></div>
+                        <div class="spine-ring-clip"></div>
+                        <div class="spine-ring-clip"></div>
+                        <div class="spine-ring-clip"></div>
+                        <div class="spine-ring-clip"></div>
+                    </div>
+
+                    <div class="inner-page-slide active">
+                        <div class="inner-page-left">
+                            <h2 class="cartoon-heading-bubble">ជួយជំនួយទាហាន</h2>
+                            <div class="cartoon-diary-bubble">សូមគោរពជូនពរ និងដឹងគុណដល់បងៗទាហានទាំងអស់ ដែលបានលះបង់ ក្លាហាន និងឈរជើងការពារទឹកដីមាតុភូមិយើងដោយភាពអង់អាចក្លាហានបំផុត! 🫡🇰🇭✨</div>
+                        </div>
+                        <div class="inner-page-right">
+                            <div class="polaroid-tape-sticker"></div>
+                            <div class="cartoon-polaroid">
+                                <div class="polaroid-image-frame"><img id="imgPreP1" src="https://picsum.photos/400/500?random=21" alt="Soldier"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inner-page-slide">
+                        <div class="inner-page-left">
+                            <h2 class="cartoon-heading-bubble" style="background: var(--cute-pink); color: white;">ជួយជនភៀសសឹក</h2>
+                            <div class="cartoon-diary-bubble">ចែករំលែកក្តីស្រឡាញ់ ទឹកចិត្ត និងមនុស្សធម៌ដ៏កក់ក្តៅ។ ចូលរួមជួយសង្គ្រោះដល់បងប្អូនជនភៀសសឹកឱ្យទទួលបាននូវក្តីសង្ឃឹម និងភាពសុខសាន្តឡើងវិញ។ 🤝❤️🎒</div>
+                        </div>
+                        <div class="inner-page-right">
+                            <div class="polaroid-tape-sticker" style="background: rgba(244, 63, 94, 0.85);"></div>
+                            <div class="cartoon-polaroid" style="transform: rotate(-3deg);">
+                                <div class="polaroid-image-frame"><img id="imgPreP2" src="https://picsum.photos/400/500?random=22" alt="Refugee"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inner-page-slide">
+                        <div class="inner-page-left">
+                            <h2 class="cartoon-heading-bubble" style="background: var(--cute-blue); color: white;">អនុស្សាវរីយ៍រួមគ្នា</h2>
+                            <div class="cartoon-diary-bubble">ចាំបានអត់? កាលពួកយើងនាំគ្នាគេចរៀន រត់ទៅលេងនៅកៀនទឹក លួចគេចម៉ោងគ្រូទាំងភ័យផងអរផង! ហើយអង្គុយលេងសើចសប្បាយជាមួយគ្នាដោយគ្មានការប្រកាន់អន់ចិត្តគ្នាបន្តិចសោះ។ សំណើច និងរឿងរ៉ាវអស់ទាំងនោះ គឺជាការចងចាំដ៏មានតម្លៃ និងជ្រៅជ្រះបំផុតនៃមិត្តភាពពួកយើង! 🌊🎒✨</div>
+                        </div>
+                        <div class="inner-page-right">
+                            <div class="polaroid-tape-sticker" style="background: rgba(254, 240, 138, 0.9);"></div>
+                            <div class="cartoon-polaroid" style="transform: rotate(3.5deg);">
+                                <div class="polaroid-image-frame"><img id="imgPreP3" src="https://picsum.photos/400/500?random=23" alt="Water"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inner-page-slide">
+                        <div class="inner-page-left">
+                            <h2 class="cartoon-heading-bubble" style="background: var(--cute-purple); color: white;">លាហើយមិត្តភក្តិ</h2>
+                            <div class="cartoon-diary-bubble">អរគុណមិត្តៗសម្រាប់ការចងចាំរយៈពេល ១ឆ្នាំដ៏អស្ចារ្យនេះ! ជីវិតវិទ្យាល័យត្រូវបានបញ្ចប់ ប៉ុន្តែសេចក្តីស្រមៃរបស់យើងទើបតែចាប់ផ្តើម។ ជូនពរអ្នកទាំងអស់គ្នាប្រឡងជាប់បាក់ឌុប (BAC II) គ្រប់ៗគ្នា! 🎓🎉🏆</div>
+                        </div>
+                        <div class="inner-page-right">
+                            <div class="polaroid-tape-sticker" style="background: rgba(167, 139, 250, 0.85);"></div>
+                            <div class="cartoon-polaroid" style="transform: rotate(-2deg);">
+                                <div class="polaroid-image-frame"><img id="imgPreP4" src="https://picsum.photos/400/500?random=24" alt="Goodbye"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inner-page-slide">
+                        <div class="inner-page-left">
+                            <h2 class="cartoon-heading-bubble" style="background: var(--cute-green); color: white;">ប្រអប់ខមិនមិត្តភក្តិ</h2>
+                            <div class="comment-input-form">
+                                <input type="text" id="cmtUserField" placeholder="✍️ វាយឈ្មោះរបស់អ្នកនៅទីនេះ..." required>
+                                
+                                <div class="sticker-tray-row">
+                                    <span class="sticker-tray-label">រើស Sticker:</span>
+                                    <span class="sticker-node-btn is-selected" onclick="pickCommentSticker('🎓', this)">🎓</span>
+                                    <span class="sticker-node-btn" onclick="pickCommentSticker('❤️', this)">❤️</span>
+                                    <span class="sticker-node-btn" onclick="pickCommentSticker('🏆', this)">🏆</span>
+                                    <span class="sticker-node-btn" onclick="pickCommentSticker('✨', this)">✨</span>
+                                    <span class="sticker-node-btn" onclick="pickCommentSticker('🫡', this)">🫡</span>
+                                </div>
+
+                                <textarea id="cmtTextField" rows="2" placeholder="💬 វាយ Comment ខ្លីៗនៅទីនេះ..." required></textarea>
+                                <button class="cartoon-btn btn-submit-cmt" onclick="executeNewCommentPublishing()">➕ ផ្ញើខមិនចូលសៀវភៅ</button>
+                            </div>
+                        </div>
+                        <div class="inner-page-right">
+                            <div class="polaroid-tape-sticker" style="background: rgba(34, 197, 94, 0.85);"></div>
+                            <div class="cartoon-polaroid" style="transform: rotate(-1.5deg); width:155px; height:190px; margin-bottom:5px;">
+                                <div class="polaroid-image-frame"><img id="imgPreP5" src="https://picsum.photos/400/500?random=29" alt="Group Photo"></div>
+                            </div>
+                            
+                            <div class="comment-stream-box" id="commentFeedWrapper">
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="page-control-footer">
+            <button class="cartoon-btn btn-page-nav" onclick="turnInnerPage(-1)">⬅️ ទំព័រមុន</button>
+            <div class="page-badge-counter" id="pageDisplayCounter">ទំព័រទី ១ / ៥</div>
+            <button class="cartoon-btn btn-page-nav" onclick="turnInnerPage(1)">ទំព័របន្ទាប់ ➡️</button>
+        </div>
+
+    </div>
+
+    <script>
+        const bookViewBox = document.getElementById('bookViewBox');
+        const pageSlides = document.querySelectorAll('.inner-page-slide');
+        const pageDisplayCounter = document.getElementById('pageDisplayCounter');
+        const wzProgressBar = document.getElementById('wzProgressBar');
+        const commentFeedWrapper = document.getElementById('commentFeedWrapper');
+        
+        let activePageIndex = 0;
+        let isBookOpened = false;
+        let wizardCompletionList = [false, false, false, false, false, false];
+        let currentChosenSticker = "🎓";
+
+        function modifyGlobalAppTheme(targetThemeClass) {
+            document.body.className = '';
+            document.body.classList.add(targetThemeClass);
+        }
+
+        function triggerFileUploader(id) {
+            document.getElementById(id).click();
+        }
+
+        function processImagePreview(input, imgElementId, index) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(imgElementId).src = e.target.result;
+                    document.getElementById(`wzRow${index}`).classList.add('done-row');
+                    const uploadBtn = document.getElementById(`wzBtn${index}`);
+                    uploadBtn.innerText = "✓ រួចរាល់";
+                    uploadBtn.classList.add('is-done');
+                    
+                    wizardCompletionList[index] = true;
+                    updateWizardProgressBar();
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateWizardProgressBar() {
+            const finishedCount = wizardCompletionList.filter(status => status === true).length;
+            const progressPercent = Math.floor((finishedCount / 6) * 100);
+            wzProgressBar.style.width = `${progressPercent}%`;
+        }
+
+        function openCartoonBook() {
+            bookViewBox.classList.add('is-open');
+            isBookOpened = true;
+            setTimeout(() => { setInterval(spawnCartoonParticles, 450); }, 1000);
+        }
+
+        function turnInnerPage(offset) {
+            if (!isBookOpened) return;
+            pageSlides[activePageIndex].classList.remove('active');
+            activePageIndex += offset;
+            if (activePageIndex < 0) activePageIndex = 0;
+            else if (activePageIndex >= pageSlides.length) activePageIndex = pageSlides.length - 1;
+
+            pageSlides[activePageIndex].classList.add('active');
+            pageDisplayCounter.innerText = `ទំព័រទី ${activePageIndex + 1} / ៥`;
+        }
+
+        function pickCommentSticker(emoji, clickElement) {
+            currentChosenSticker = emoji;
+            const targetNodes = document.querySelectorAll('.sticker-node-btn');
+            targetNodes.forEach(node => node.classList.remove('is-selected'));
+            clickElement.classList.add('is-selected');
+        }
+
+        function executeNewCommentPublishing() {
+            const nameInput = document.getElementById('cmtUserField');
+            const textInput = document.getElementById('cmtTextField');
+
+            if (nameInput.value.trim() === "" || textInput.value.trim() === "") {
+                alert("សូមបំពេញឈ្មោះ និង Comment របស់អ្នកជាមុនសិនណា! 🌸");
+                return;
+            }
+
+            const userName = nameInput.value.trim();
+            const userText = textInput.value.trim();
+
+            const newCard = document.createElement('div');
+            newCard.classList.add('single-comment-card');
+
+            const autoBlessingHtml = `<div class="comment-blessing">${currentChosenSticker} ជូនពរ ${userName} ឱ្យប្រឡងជាប់បាក់ឌុប (BAC II) និទ្ទេសល្អៗ និងរៀនកាន់តែពូកែជោគជ័យគ្រប់ភារកិច្ច! 🎓🎉</div>`;
+
+            newCard.innerHTML = `
+                <div class="comment-user-header">✍️ ${userName}</div>
+                <div class="comment-text">${userText}</div>
+                ${autoBlessingHtml}
+            `;
+
+            commentFeedWrapper.insertBefore(newCard, commentFeedWrapper.firstChild);
+            nameInput.value = "";
+            textInput.value = "";
+            commentFeedWrapper.scrollTop = 0;
+        }
+
+        function spawnCartoonParticles() {
+            if (!isBookOpened) return;
+            const targetRightPage = pageSlides[activePageIndex].querySelector('.inner-page-right');
+            if (!targetRightPage) return;
+
+            const element = document.createElement('div');
+            element.classList.add('floating-pop-node');
+            element.innerHTML = ['❤️', '💖', '✨', '🌸', '💝', '⭐', '🎈', '💬'][Math.floor(Math.random() * 8)];
+            element.style.left = `${Math.random() * 170 + 35}px`;
+            element.style.bottom = '55px';
+            element.style.fontSize = `${Math.random() * 0.5 + 1.2}rem`;
+            
+            targetRightPage.appendChild(element);
+            setTimeout(() => { element.remove(); }, 2500);
+        }
+    </script>
+</body>
+</html>
